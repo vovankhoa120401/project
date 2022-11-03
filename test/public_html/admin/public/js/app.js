@@ -201,6 +201,31 @@ $(document).ready(function () {
         });
     });
 
+    $(".btn-success").click(function() {
+        var userName = $("#usr").val();
+        var password = $("#pwd").val();
+        var login = "loginUser";
+        $.ajax({
+            url: "https://xuankhai.000webhostapp.com/admin/user/controller/indexController.php",
+            type: "POST",
+            data: {
+                userName: userName,
+                password: password,
+                loginUser : login,
+            },
+            dataType: "json",
+            success: function(result) {
+                if (result['success'] == true) {
+                    window.location = "https://xuankhai.000webhostapp.com/";
+                }
+                else {
+                    alert(result['message']);
+                }
+            },
+
+        });
+    });
+
     $(".listActionUser").click(function () {
         var listId = $("input[name^='check']:checked:enabled").map(function (idx, ele) {
             if ($(ele).val() !== 'on') {
