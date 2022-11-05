@@ -6,6 +6,7 @@
     Version: 1.0
     Created: Colorlib
 ---------------------------------------------------------  */
+var baseUrl = "http://localhost/project";
 
 'use strict';
 
@@ -198,6 +199,27 @@
             });
         }
     });
+
+    $("#logo").click(function () {
+        var getAllProduct = "isGet";
+        $.ajax({
+            url: baseUrl+"/admin/product/controller/indexController.php",
+            type: "post",
+            data: {
+                getAllProduct: getAllProduct,
+            },
+            dataType: "json",
+            success: function (result) {
+                if (result['success'] === true) {
+                    for (let i = 1; i < result['data'].length; i++) {
+                        // var id = "#product" + i;
+                        $("#product" + i).html(result['data'][i]['productName']);
+                      }
+                } else {
+                }
+            },
+        });
+    })
 
     /*-------------------
 		Quantity change

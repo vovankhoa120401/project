@@ -3,8 +3,7 @@ include 'connection.php';
 include 'validate.php';
 
 global $config;
-
-$config['baseUrl'] = "https://xuankhai.000webhostapp.com";
+$config['baseUrl'] = "http://localhost/project/";
 function responeCheckQuery($query)
 {
     if (!$result = mysqli_query(connection(), $query)) {

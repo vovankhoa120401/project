@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    var baseUrl = "https://xuankhai.000webhostapp.com";
+    var baseUrl = "http://localhost/project/";
     $('.nav-link.active .sub-menu').slideDown();
     $("p").slideUp();
 
@@ -73,6 +73,26 @@ $(document).ready(function () {
             data: {
                 postId: postId,
                 delPost: delPost,
+            },
+            dataType: "json",
+            success: function (result) {
+                if (result['success'] === true) {
+                    $("#" + result['data'][0]).html("đã xóa");
+                } else {
+                    alert(result['message']);
+                }
+            },
+        });
+    })
+
+    $("#logo").click(function () {
+        alert("afaf");
+        var getAllProduct = "isGet";
+        $.ajax({
+            url: baseUrl+"/admin/product/controller/indexController.php",
+            type: "post",
+            data: {
+                getAllProduct: getAllProduct,
             },
             dataType: "json",
             success: function (result) {

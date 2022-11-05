@@ -23,6 +23,8 @@
             $this->isActive = $isActive;
         }
 
+        
+
         public function addProduct(product $product)
     {
         try {
@@ -84,8 +86,7 @@
             $start = 1;
             }
             $query = "SELECT * , category.categoryName FROM product INNER JOIN category ON product.categoryId = category.categoryId LIMIT $start, $limit";
-            echo $current_page;
-            return json_decode(responeCheckQuery($query));
+            echo responeCheckQuery($query);
 
         } catch (Exception $e) {
             $e->getMessage();

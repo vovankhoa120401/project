@@ -21,7 +21,13 @@ header("location: $config/admin/?view=list-product");
 header("location: $config/admin/?view=add-product");
 
         }
-    }   
+    }  
+    
+    if(isset($_POST['getAllProduct']))
+    {
+        $product = new Product(0,0,0,0,0,0,0,0);
+         $product->getAllProduct(1);
+    }
     if(isset($_POST['delProduct'])){
         $productId = $_POST['productId'];
         $isActive = $_POST['isActive'];
