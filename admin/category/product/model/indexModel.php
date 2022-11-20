@@ -1,9 +1,12 @@
-<?php 
-    class category {
-        public $catogoryId;
-        public $userId;
-        public $categoryName;
-        public $parentId;
+<?php
+ include '../../../myhelper.php';
+
+class category
+{
+    public $catogoryId;
+    public $userId;
+    public $categoryName;
+    public $parentId;
 
     public function __construct($userId, $categoryName, $parentId)
     {
@@ -19,8 +22,8 @@
             if (
                 $category->catogoryId === ''
                 || $category->userId === ''
-                || $category->categoryName ===''
-                || $category->parentId ===''
+                || $category->categoryName === ''
+                || $category->parentId === ''
             ) {
 
                 $array_respone = [
@@ -30,7 +33,6 @@
                     "error" => "lay du lieu khong lieu thanh cong",
                 ];
                 echo json_encode($array_respone);
-
             }
             // $order->password, $order->fullName , $order->address, $order->city
             $query = sprintf("INSERT INTO category (userId, categoryName, parentId) VALUES (%s,'%s',%s)", $category->userId, $category->categoryName, $category->parentId);
@@ -43,44 +45,39 @@
                     "message" => "error",
                     "error" => "lay du lieu khong lieu thanh cong",
                 ];
-                echo json_encode($array_respone);      
-
+                echo json_encode($array_respone);
             }
 
-                $array_respone = [
-                    "success" => true,
-                    "status_code" => 200,
-                    "message" => "ban da them thanh cong danh muc ",
-                    "error" => "",
-                ];
-                echo json_encode($array_respone);      
-
-
+            $array_respone = [
+                "success" => true,
+                "status_code" => 200,
+                "message" => "ban da them thanh cong danh muc ",
+                "error" => "",
+            ];
+            echo json_encode($array_respone);
         } catch (Exception $e) {
 
             $e->getMessage();
-            
         }
     }
 
-    public function getParentCategory(){
+    public function getParentCategory()
+    {
         $query = "SELECT * FROM category WHERE parentId = 0";
-        return json_decode(responeCheckQuery($query));
-
+        echo responeCheckQuery($query);
     }
 
-    public function getAllCategory(){
+    public function getAllCategory()
+    {
         $query = "SELECT * FROM category";
-        return json_decode(responeCheckQuery($query),true);
+        $row = responeCheckQuery($query);
+        echo $row;
     }
 
-    public function getCategoryId($category){
+    public function getCategoryId($category)
+    {
 
         $query = "SELECT * FROM category WHERE categoryId = $category";
-        return json_decode(responeCheckQuery($query));
+        echo responeCheckQuery($query);
     }
-
-    
 }
-
-    //function ///

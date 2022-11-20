@@ -66,19 +66,19 @@
 
     public function getParentCategory(){
         $query = "SELECT * FROM categories WHERE parentId = 0";
-        return json_decode(responeCheckQuery($query));
+        echo responeCheckQuery($query);
 
     }
 
     public function getAllCategory(){
         $query = "SELECT * FROM categories";
-        return json_decode(responeCheckQuery($query),true);
+        echo responeCheckQuery($query);
     }
 
     public function getCategoryId($category){
 
         $query = "SELECT * FROM categories WHERE categoryId = $category";
-        return json_decode(responeCheckQuery($query));
+        echo responeCheckQuery($query);
     }
 
     

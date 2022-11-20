@@ -1,4 +1,4 @@
-$(document).ready(function () {
+
     var baseUrl = "http://localhost/project/";
     $('.nav-link.active .sub-menu').slideDown();
     $("p").slideUp();
@@ -18,7 +18,7 @@ $(document).ready(function () {
         var parentId = $('#parentId option:selected').val();
         var addCat = "asdasd";
         $.ajax({
-            url: baseUrl+"/admin/category/product/controller/indexController.php",
+            url: baseUrl + "/admin/category/product/controller/indexController.php",
             type: "post",
             data: {
                 categoryName: categoryName,
@@ -45,7 +45,7 @@ $(document).ready(function () {
         alert(productId);
 
         $.ajax({
-            url: baseUrl+"/admin/product/controller/indexController.php",
+            url: baseUrl + "/admin/product/controller/indexController.php",
             type: "post",
             data: {
                 productId: productId,
@@ -68,7 +68,7 @@ $(document).ready(function () {
         var postId = $(this).attr('id');
         var delPost = "delPost";
         $.ajax({
-            url: baseUrl+"/admin/post/controller/indexController.php",
+            url: baseUrl + "/admin/post/controller/indexController.php",
             type: "post",
             data: {
                 postId: postId,
@@ -85,31 +85,14 @@ $(document).ready(function () {
         });
     })
 
-    $("#logo").click(function () {
-        var getAllProduct = "isGet";
-        $.ajax({
-            url: baseUrl+"/admin/product/controller/indexController.php",
-            type: "GET",
-            data: {
-                getAllProduct: getAllProduct,
-            },
-            dataType: "json",
-            success: function (result) {
-                if (result['success'] === true) {
-                    $("#" + result['data'][0]).html("đã xóa");
-                } else {
-                    alert(result['message']);
-                }
-            },
-        });
-    })
+    
 
     $(".btnDeleteUser").click(function () {
         var userId = $(this).attr('id');
         var delUser = "delUser";
 
         $.ajax({
-            url: baseUrl+"/admin/user/controller/indexController.php",
+            url: baseUrl + "/admin/user/controller/indexController.php",
             type: "post",
             data: {
                 userId: userId,
@@ -131,7 +114,7 @@ $(document).ready(function () {
         var delOrder = "delOrder";
 
         $.ajax({
-            url: baseUrl+"/admin/order/controller/indexController.php",
+            url: baseUrl + "/admin/order/controller/indexController.php",
             type: "post",
             data: {
                 orderId: orderId,
@@ -157,7 +140,7 @@ $(document).ready(function () {
         var statusProduct = $('#listActive option:selected').val();
         var listAction = "listAction";
         $.ajax({
-            url: baseUrl+"/admin/product/controller/indexController.php",
+            url: baseUrl + "/admin/product/controller/indexController.php",
             type: "post",
             data: {
                 listId: listId,
@@ -192,7 +175,7 @@ $(document).ready(function () {
         var statusPost = $('#listActive option:selected').val();
         var listAction = "listAction";
         $.ajax({
-            url: baseUrl+"/admin/post/controller/indexController.php",
+            url: baseUrl + "/admin/post/controller/indexController.php",
             type: "post",
             data: {
                 listId: listId,
@@ -220,7 +203,7 @@ $(document).ready(function () {
         });
     });
 
-    $(".btn-success").click(function() {
+    $(".btn-success").click(function () {
         var userName = $("#usr").val();
         var password = $("#pwd").val();
         var login = "loginUser";
@@ -230,10 +213,10 @@ $(document).ready(function () {
             data: {
                 userName: userName,
                 password: password,
-                loginUser : login,
+                loginUser: login,
             },
             dataType: "json",
-            success: function(result) {
+            success: function (result) {
                 if (result['success'] == true) {
                     window.location = "https://xuankhai.000webhostapp.com/";
                 }
@@ -255,7 +238,7 @@ $(document).ready(function () {
         var listAction = "listAction";
         alert(listId);
         $.ajax({
-            url: baseUrl+"/admin/user/controller/indexController.php",
+            url: baseUrl + "/admin/user/controller/indexController.php",
             type: "post",
             data: {
                 listId: listId,
@@ -293,7 +276,7 @@ $(document).ready(function () {
         var statusOrder = $('#listActive option:selected').val();
         var listAction = "listAction";
         $.ajax({
-            url: baseUrl+"/admin/order/controller/indexController.php",
+            url: baseUrl + "/admin/order/controller/indexController.php",
             type: "post",
             data: {
                 listId: listId,
@@ -352,7 +335,7 @@ $(document).ready(function () {
 
         function showThumbUpload(data) {
             var items;
-            items = '<img width="200px" height="200px" src="' + baseUrl+'/admin/public/image/' + data.name + '"/>';
+            items = '<img width="200px" height="200px" src="' + baseUrl + '/admin/public/image/' + data.name + '"/>';
             $('#show_list_file').html(items);
         }
 
@@ -365,7 +348,7 @@ $(document).ready(function () {
         var addCart = "addcart";
 
         $.ajax({
-            url: baseUrl+"/admin/cart/indexController.php",
+            url: baseUrl + "/admin/cart/indexController.php",
             type: "post",
             data: {
                 id: id,
@@ -402,7 +385,7 @@ $(document).ready(function () {
         var addCart = "addcart";
 
         $.ajax({
-            url: baseUrl+"/admin/cart/indexController.php",
+            url: baseUrl + "/admin/cart/indexController.php",
             type: "post",
             data: {
                 id: id,
@@ -430,7 +413,7 @@ $(document).ready(function () {
         var phone_number = $("#phone").val();
         var note = $("#note").val();
         $.ajax({
-            url: baseUrl+"/admin/order/controller/indexController.php",
+            url: baseUrl + "/admin/order/controller/indexController.php",
             type: "post",
             data: {
                 order: order,
@@ -455,7 +438,7 @@ $(document).ready(function () {
         var orderId = $(this).attr('class');
 
         $.ajax({
-            url: baseUrl+"/admin/order/controller/indexController.php",
+            url: baseUrl + "/admin/order/controller/indexController.php",
             type: "post",
             data: {
                 statusOrder: statusOrder,
@@ -486,7 +469,7 @@ $(document).ready(function () {
         var addCart = "addcart";
         alert(price);
         $.ajax({
-            url: baseUrl+"/admin/cart/indexController.php",
+            url: baseUrl + "/admin/cart/indexController.php",
             type: "post",
             data: {
                 id: id,
@@ -524,7 +507,7 @@ $(document).ready(function () {
 
 
         $.ajax({
-            url: baseUrl+"/admin/cart/indexController.php",
+            url: baseUrl + "/admin/cart/indexController.php",
             type: "post",
             data: {
                 id: id,
@@ -557,7 +540,7 @@ $(document).ready(function () {
         var id = $(this).attr('id');
         var delProduct = "delProduct";
         $.ajax({
-            url: baseUrl+"/admin/cart/indexController.php",
+            url: baseUrl + "/admin/cart/indexController.php",
             type: "post",
             data: {
                 id: id,
@@ -578,7 +561,7 @@ $(document).ready(function () {
         });
     });
     var slider = $('.section-same .section-detail');
-    
+
     slider.owlCarousel({
         autoPlay: 4500,
         navigation: false,
@@ -592,10 +575,10 @@ $(document).ready(function () {
         itemsMobile: true // itemsMobile disabled - inherit from itemsTablet option
     });
 
-//  ZOOM PRODUCT DETAIL
-    $("#zoom").elevateZoom({gallery: 'list-thumb', cursor: 'pointer', galleryActiveClass: 'active', imageCrossfade: true, loadingIcon: 'http://www.elevateweb.co.uk/spinner.gif'});
+    //  ZOOM PRODUCT DETAIL
+    $("#zoom").elevateZoom({ gallery: 'list-thumb', cursor: 'pointer', galleryActiveClass: 'active', imageCrossfade: true, loadingIcon: 'http://www.elevateweb.co.uk/spinner.gif' });
 
-//  LIST THUMB
+    //  LIST THUMB
     var list_thumb = $('#list-thumb');
     list_thumb.owlCarousel({
         navigation: true,
@@ -610,7 +593,7 @@ $(document).ready(function () {
         itemsMobile: true // itemsMobile disabled - inherit from itemsTablet option
     });
 
-//  FEATURE PRODUCT
+    //  FEATURE PRODUCT
     var feature_product = $('#feature-product-wp .list-item');
     feature_product.owlCarousel({
         autoPlay: true,
@@ -626,7 +609,7 @@ $(document).ready(function () {
         itemsMobile: [375, 1] // itemsMobile disabled - inherit from itemsTablet option
     });
 
-//  SAME CATEGORY
+    //  SAME CATEGORY
     var same_category = $('#same-category-wp .list-item');
     same_category.owlCarousel({
         autoPlay: true,
@@ -642,7 +625,7 @@ $(document).ready(function () {
         itemsMobile: [375, 1] // itemsMobile disabled - inherit from itemsTablet option
     });
 
-//  SCROLL TOP
+    //  SCROLL TOP
     $(window).scroll(function () {
         if ($(this).scrollTop() != 0) {
             $('#btn-top').stop().fadeIn(150);
@@ -651,10 +634,10 @@ $(document).ready(function () {
         }
     });
     $('#btn-top').click(function () {
-        $('body,html').stop().animate({scrollTop: 0}, 800);
+        $('body,html').stop().animate({ scrollTop: 0 }, 800);
     });
 
-// CHOOSE NUMBER ORDER
+    // CHOOSE NUMBER ORDER
     var value = parseInt($('#num-order').attr('value'));
     $('#plus').click(function () {
         value++;
@@ -669,10 +652,10 @@ $(document).ready(function () {
         update_href(value);
     });
 
-//  MAIN MENU
+    //  MAIN MENU
     $('#category-product-wp .list-item > li').find('.sub-menu').after('<i class="fa fa-angle-right arrow" aria-hidden="true"></i>');
 
-//  TAB
+    //  TAB
     tab();
 
     //  EVEN MENU RESPON
@@ -696,33 +679,32 @@ $(document).ready(function () {
         }
     });
 
-//  MENU RESPON
+    //  MENU RESPON
     $('#main-menu-respon li .sub-menu').after('<span class="fa fa-angle-right arrow"></span>');
     $('#main-menu-respon li .arrow').click(function () {
         if ($(this).parent('li').hasClass('open')) {
             $(this).parent('li').removeClass('open');
         } else {
 
-//            $('.sub-menu').slideUp();
-//            $('#main-menu-respon li').removeClass('open');
+            //            $('.sub-menu').slideUp();
+            //            $('#main-menu-respon li').removeClass('open');
             $(this).parent('li').addClass('open');
-//            $(this).parent('li').find('.sub-menu').slideDown();
+            //            $(this).parent('li').find('.sub-menu').slideDown();
         }
     });
-    
 
-function tab() {
-    var tab_menu = $('#tab-menu li');
-    tab_menu.stop().click(function () {
-        $('#tab-menu li').removeClass('show');
-        $(this).addClass('show');
-        var id = $(this).find('a').attr('href');
-        $('.tabItem').hide();
-        $(id).show();
-        return false;
-    });
-    $('#tab-menu li:first-child').addClass('show');
-    $('.tabItem:first-child').show();
-}
-document.getElementById("p").style.display = "block";
-});
+
+    function tab() {
+        var tab_menu = $('#tab-menu li');
+        tab_menu.stop().click(function () {
+            $('#tab-menu li').removeClass('show');
+            $(this).addClass('show');
+            var id = $(this).find('a').attr('href');
+            $('.tabItem').hide();
+            $(id).show();
+            return false;
+        });
+        $('#tab-menu li:first-child').addClass('show');
+        $('.tabItem:first-child').show();
+    }
+    document.getElementById("p").style.display = "block";

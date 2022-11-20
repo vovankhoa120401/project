@@ -177,9 +177,8 @@
             }
 
             $query = "SELECT * , category.categoryName FROM product INNER JOIN category ON product.categoryId = category.categoryId WHERE productId = $id";
-            echo $query;
-            $row = json_decode(responeCheckQuery($query));
-            return $row;
+            $row = responeCheckQuery($query);
+            echo $row;
             }
         
             catch (Exception $e) {
@@ -201,22 +200,20 @@
 
             }
 
-            $query = "UPDATE  product SET status = '$status' WHERE productId IN (";
+            $query = "UPDATE  product SET status = $status WHERE productId IN (";
 
             $key = true;
-
-            foreach ($productId as $item) {
+            for($i = 0; $i < Count($productId); $i++)
+            {
                 if ($key == true) {
                     $key = false;
                 } else {
                     $query = $query . ',';
                 }
 
-                $query = $query . $item;
+                $query = $query . $productId[$i];
             }
-
             $query = $query . ')';
-            echo $query;
             echo responeField($query , $productId, $status);
             
         }
@@ -230,7 +227,7 @@
         {
             try {
 
-                if ($catId <= 0) {
+                if ($catId < 0) {
                     $array_respone = [
                         "success" => false,
                         "status_code" => 100,
@@ -239,9 +236,7 @@
                     ];
                     echo json_encode($array_respone);
                 }
-
-                $query = "SELECT * FROM product WHERE categoryId = '$catId' ";
-                echo $query;
+                $query = "SELECT * FROM product WHERE categoryId = $catId ";
                 echo responeCheckQuery($query);
 
             } catch (Exception $e) {

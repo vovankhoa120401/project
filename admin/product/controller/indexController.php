@@ -21,9 +21,11 @@ if (isset($_POST['addProduct'])) {
         header("location: $config/admin/?view=add-product");
     }
 }
+if (isset($_POST['getAllProduct'])) {
+    $product = new Product(0, 0, 0, 0, 0, 0, 0, 0);
+    echo $product->getAllProduct(1);
+}
 
-// $product = new Product(0, 0, 0, 0, 0, 0, 0, 0);
-// $product->getAllProduct(1);
 if (isset($_POST['delProduct'])) {
     $productId = $_POST['productId'];
     $isActive = $_POST['isActive'];
@@ -58,21 +60,25 @@ if (isset($_GET['isShowDeleteProduct'])) {
 if (isset($_POST['listAction'])) {
     if ($_POST['statusProduct'] == 0) {
         $product = new Product(0, 0, "", "", "", 0, 0, 0);
-        echo $product->changeListProductStatus($_POST['listId'], 0);
+        echo $product->changeListProductStatus(json_decode($_POST['listId']), 0);
     }
     if ($_POST['statusProduct'] == 1) {
-        echo $_POST['listId'];
         $product = new Product(0, 0, "", "", "", 0, 0, 0);
-        echo $product->changeListProductStatus($_POST['listId'], 1);
+        echo $product->changeListProductStatus(json_decode($_POST['listId']), 1);
     }
 
     if ($_POST['statusProduct'] == 2) {
         $product = new Product(0, 0, "", "", "", 0, 0, 0);
-        echo $product->changeListProductStatus($_POST['listId'], 2);
+        echo $product->changeListProductStatus(json_decode($_POST['listId']), 2);
     }
 }
 
-if (isset($_GET['getProductByCatId']))
-{
-    echo $product->getListProductsByCatId($_POST['catId']);
+if (isset($_GET['getProductByCatId'])) {
+    $product = new Product(0, 0, "", "", "", 0, 0, 0);
+    echo $product->getListProductsByCatId($_GET['catId']);
+}
+
+if (isset($_GET['getProductById'])) {
+    $product = new Product(0, 0, "", "", "", 0, 0, 0);
+    echo $product->getProductById($_GET['productId']);
 }

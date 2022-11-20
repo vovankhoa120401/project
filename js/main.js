@@ -7,7 +7,8 @@
     Created: Colorlib
 ---------------------------------------------------------  */
 var baseUrl = "http://localhost/project";
-
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
 'use strict';
 
 (function ($) {
@@ -54,8 +55,8 @@ var baseUrl = "http://localhost/project";
     });
 
     /*------------------
-		Navigation
-	--------------------*/
+        Navigation
+    --------------------*/
     $(".mobile-menu").slicknav({
         prependTo: '#mobile-menu-wrap',
         allowParentLinks: true
@@ -97,7 +98,7 @@ var baseUrl = "http://localhost/project";
     });
 
 
-    $('.hero__categories__all').on('click', function(){
+    $('.hero__categories__all').on('click', function () {
         $('.hero__categories ul').slideToggle(400);
     });
 
@@ -161,8 +162,8 @@ var baseUrl = "http://localhost/project";
     });
 
     /*-----------------------
-		Price Range Slider
-	------------------------ */
+        Price Range Slider
+    ------------------------ */
     var rangeSlider = $(".price-range"),
         minamount = $("#minamount"),
         maxamount = $("#maxamount"),
@@ -187,8 +188,8 @@ var baseUrl = "http://localhost/project";
     $("select").niceSelect();
 
     /*------------------
-		Single Product
-	--------------------*/
+        Single Product
+    --------------------*/
     $('.product__details__pic__slider img').on('click', function () {
 
         var imgurl = $(this).data('imgbigurl');
@@ -200,31 +201,110 @@ var baseUrl = "http://localhost/project";
         }
     });
 
+    let tbody = document.getElementById("productTest");
+    console.log(tbody);
+    function product(name, price, img, productId) {
+        let td = document.createElement('div');
+        td.classList.add("col-lg-3");
+        td.classList.add("col-md-4");
+        td.classList.add("col-sm-6");
+        td.classList.add("mix");
+        td.classList.add("oranges");
+        td.classList.add("fresh-meat");
+        td.innerHTML = `
+        <div class="featured__item" id = "product${productId}">
+            <div class="featured__item__pic set-bg" data-setbg="img/product/${img}">
+            <a href="shop-details.html?getProductById=true&productId=${productId}" class="">
+                <img src="img/product/${img}" alt="">
+            </a>
+                <ul class="featured__item__pic__hover">
+                    <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                    <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                    <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                </ul>
+            </div>
+            <div class="featured__item__text">
+                <h6 id = "product1"><a href="#">${name}</a></h6>
+                <h5>${price}</h5>
+            </div>
+        </div>`;
+        return td;
+    }
+
+    // get listt product main
     $("#logo").click(function () {
         var getAllProduct = "isGet";
         $.ajax({
-            url: baseUrl+"/admin/product/controller/indexController.php",
-            type: "post",
+            url: baseUrl + "/admin/product/controller/indexController.php",
+            type: "POST",
             data: {
                 getAllProduct: getAllProduct,
             },
             dataType: "json",
             success: function (result) {
                 if (result['success'] === true) {
-                    for (let i = 1; i < result['data'].length; i++) {
-                        // var id = "#product" + i;
-                        $("#product" + i).html(result['data'][i]['productName']);
-                      }
-                } else
-                {
+                    for (let i = 0; i <= result['data'].length; i++) {
+                        tbody.append(product(result['data'][i]['productName']
+                            , result['data'][i]['price']
+                            , result['data'][i]['image']
+                            , result['data'][i]['productId']));
+                    }
 
+                } else {
+                    alert(result['message']);
                 }
-            },
+            }
         });
     })
+    
+    if (urlParams.get('getProductById') != "") {
+        let getProductById = "true";
+        let productId = urlParams.get('productId');
+        $.ajax({
+            url: baseUrl + "/admin/product/controller/indexController.php",
+            type: "GET",
+            data: {
+                getProductById: getProductById,
+                productId: productId
+            },
+            dataType: "json",
+            success: function (result) {
+                if (result['success'] === true) {
+                    $(".productName").html(result['data'][0]['productName']);
+                    $(".productPrice").html(result['data'][0]['price']);
+                    $(".productImg").attr('src',"img/product/" + result['data'][0]['image']);
+                } else {
+                    alert(result['message']);
+                }
+            }
+        });
+    }
+    //img/product/details/product-details-1.jpg
+    // $("#logo").click(function () {
+    //     var getAllProduct = "isGet";
+    //     $.ajax({
+    //         url: baseUrl+"/admin/product/controller/indexController.php",
+    //         type: "post",
+    //         data: {
+    //             getAllProduct: getAllProduct,
+    //         },
+    //         dataType: "json",
+    //         success: function (result) {
+    //             if (result['success'] === true) {
+    //                 for (let i = 1; i < result['data'].length; i++) {
+    //                     // var id = "#product" + i;
+    //                     $("#product" + i).html(result['data'][i]['productName']);
+    //                   }
+    //             } else
+    //             {
+
+    //             }
+    //         },
+    //     });
+    // })
     /*-------------------
-		Quantity change
-	--------------------- */
+        Quantity change
+    --------------------- */
     var proQty = $('.pro-qty');
     proQty.prepend('<span class="dec qtybtn">-</span>');
     proQty.append('<span class="inc qtybtn">+</span>');
