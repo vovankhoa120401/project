@@ -95,6 +95,7 @@
 
         public function updateProduct(product $product, $productId){
             try {
+                $product->userId = 1;
                 $error_code = array();
                 if (
                     $product->categoryId === ''
@@ -116,9 +117,9 @@
 
                 }
                 // $order->password, $order->fullName , $order->address, $order->city
-                $query = "UPDATE  product  set categoryId =  $product->categoryId, userId = $product->userId, productName = '$product->productName', image= '$product->image', decription = '$product->decription' , size = '$product->size', price = $product->price WHERE productId = $productId";
-                $row = json_decode(responeField($query,[$productId], 0),true);
-                return $row;
+                $query = "UPDATE  product  set categoryId =  $product->categoryId, userId = $product->userId, productName = '$product->productName', image= '$product->image', decription = '$product->decription' , size = '$product->size', price = $product->price, isActive = '$product->isActive' WHERE productId = $productId";
+                $row = responeField($query,[$productId], 0);
+                echo $row;
 
                 $array_respone = [
                     "success" => true,
@@ -138,15 +139,14 @@
 
     public function delProduct($productId){
         $query = "UPDATE product SET isActive = '0' WHERE productId = $productId";
-        $row = responeField($query, [$productId],0); 
-        echo $row;
+        echo responeField($query, [$productId],0); 
         
     }
 
     public function showDeleteProduct(){
         $query = "SELECT * , category.categoryName FROM product INNER JOIN category ON product.categoryId = category.categoryId WHERE isActive = '0'";
-        $row = json_decode(responeCheckQuery($query));
-        return $row;
+        $row = responeCheckQuery($query);
+        echo $row;
     }
 
     public function showStocking(){
@@ -189,7 +189,6 @@
 
     public function changeListProductStatus($productId=[] , $status){
         try {
-
             if ($productId == []) {
 
                 $array_respone = [
@@ -198,7 +197,7 @@
                     "message" => "error",
                     "error" => "lay du lieu khong lieu thanh cong",
                 ];
-                return $array_respone;
+                echo json_encode($array_respone);
 
             }
 
@@ -217,10 +216,12 @@
             }
 
             $query = $query . ')';
-
+            echo $query;
             echo responeField($query , $productId, $status);
             
-        } catch (Exception $e) {
+        }
+        catch (Exception $e)
+        {
             $e->getMessage();
         }  
     }
@@ -239,8 +240,9 @@
                     echo json_encode($array_respone);
                 }
 
-                $query = "SELECT * FROM product WHERE categoryId = $catId;";
-                return json_decode(responeCheckQuery($query));
+                $query = "SELECT * FROM product WHERE categoryId = '$catId' ";
+                echo $query;
+                echo responeCheckQuery($query);
 
             } catch (Exception $e) {
 

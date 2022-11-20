@@ -86,11 +86,10 @@ $(document).ready(function () {
     })
 
     $("#logo").click(function () {
-        alert("afaf");
         var getAllProduct = "isGet";
         $.ajax({
             url: baseUrl+"/admin/product/controller/indexController.php",
-            type: "post",
+            type: "GET",
             data: {
                 getAllProduct: getAllProduct,
             },

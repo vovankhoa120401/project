@@ -215,12 +215,13 @@ var baseUrl = "http://localhost/project";
                         // var id = "#product" + i;
                         $("#product" + i).html(result['data'][i]['productName']);
                       }
-                } else {
+                } else
+                {
+
                 }
             },
         });
     })
-
     /*-------------------
 		Quantity change
 	--------------------- */
