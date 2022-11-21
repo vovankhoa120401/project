@@ -58,109 +58,7 @@
                         <th scope="col">Tác vụ</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>1212</td>
-                        <td>
-                            Phan Văn Cương <br>
-                            0988859692
-                        </td>
-                        <td><a href="#">Samsung Galaxy A51 (8GB/128GB)</a></td>
-                        <td>1</td>
-                        <td>7.790.000₫</td>
-                        <td><span class="badge badge-warning">Đang xử lý</span></td>
-                        <td>26:06:2020 14:00</td>
-                        <td>
-                            <a href="#" class="btn btn-success btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-edit"></i></a>
-                            <a href="#" class="btn btn-danger btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash"></i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>1213</td>
-                        <td>
-                            Minh Anh <br>
-                            0868873382
-                        </td>
-                        <td><a href="#">Samsung Galaxy A51 (8GB/128GB)</a></td>
-                        <td>1</td>
-                        <td>7.790.000₫</td>
-                        <td><span class="badge badge-warning">Đang xử lý</span></td>
-                        <td>26:06:2020 14:00</td>
-                        <td>
-                            <a href="#" class="btn btn-success btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-edit"></i></a>
-                            <a href="#" class="btn btn-danger btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash"></i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>1214</td>
-                        <td>
-                            Trần Thu Hằng <br>
-                            0234343545
-                        </td>
-                        <td><a href="#">Điện thoại iPhone 11 Pro Max 64GB</a></td>
-                        <td>1</td>
-                        <td>29.490.000₫</td>
-                        <td><span class="badge badge-success">Hoàn thành</span></td>
-                        <td>26:06:2020 14:00</td>
-                        <td>
-                            <a href="#" class="btn btn-success btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-edit"></i></a>
-                            <a href="#" class="btn btn-danger btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash"></i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">4</th>
-                        <td>1212</td>
-                        <td>
-                            Tuấn Anh <br>
-                            091236768
-                        </td>
-                        <td><a href="#">Apple MacBook Pro Touch 2020 i5 512GB</a></td>
-                        <td>1</td>
-                        <td>47.990.000₫</td>
-                        <td><span class="badge badge-warning">Đang xử lý</span></td>
-                        <td>26:06:2020 14:00</td>
-                        <td>
-                            <a href="#" class="btn btn-success btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-edit"></i></a>
-                            <a href="#" class="btn btn-danger btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash"></i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>1214</td>
-                        <td>
-                            Trần Thu Hằng <br>
-                            0234343545
-                        </td>
-                        <td><a href="#">Điện thoại iPhone 11 Pro Max 64GB</a></td>
-                        <td>1</td>
-                        <td>29.490.000₫</td>
-                        <td><span class="badge badge-success">Hoàn thành</span></td>
-                        <td>26:06:2020 14:00</td>
-                        <td>
-                            <a href="#" class="btn btn-success btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-edit"></i></a>
-                            <a href="#" class="btn btn-danger btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash"></i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">4</th>
-                        <td>1212</td>
-                        <td>
-                            Tuấn Anh <br>
-                            091236768
-                        </td>
-                        <td><a href="#">Apple MacBook Pro Touch 2020 i5 512GB</a></td>
-                        <td>1</td>
-                        <td>47.990.000₫</td>
-                        <td><span class="badge badge-success">Hoàn thành</span></td>
-                        <td>26:06:2020 14:00</td>
-                        <td>
-                            <a href="#" class="btn btn-success btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-edit"></i></a>
-                            <a href="#" class="btn btn-danger btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash"></i></a>
-                        </td>
-                    </tr>
+                <tbody  id = "listProduct">
                    
                 </tbody>
             </table>
@@ -187,3 +85,55 @@
     </div>
 
 </div>
+<script>
+    function GetProductsByCatIdInAdmin(name, price,status) {
+        let td = document.createElement('tr');
+        td.innerHTML = `
+                        <th scope="row">4</th>
+                        <td>1212</td>
+                        <td>
+                            Tuấn Anh <br>
+                            091236768
+                        </td>
+                        <td><a href="#">${name}</a></td>
+                        <td>1</td>
+                        <td>${price}₫</td>
+                        <td><span class="badge badge-success">${status}</span></td>
+                        <td>26:06:2020 14:00</td>
+                        <td>
+                            <a href="#" class="btn btn-success btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-edit"></i></a>
+                            <a href="#" class="btn btn-danger btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash"></i></a>
+                        </td>
+                    `;
+        return td;
+    }
+    let tbody = document.getElementById("listProduct");
+    var getAllProduct = "isGet";
+        $.ajax({
+            url: baseUrl + "/admin/product/controller/indexController.php",
+            type: "POST",
+            data: {
+                getAllProduct: getAllProduct,
+            },
+            dataType: "json",
+            success: function (result) {
+                if (result['success'] === true) {
+                    for (let i = 0; i <= result['data'].length; i++) {
+                        if(result['data'][i]['status'] == "1")
+                        {
+                            result['data'][i]['status'] = "da xoa";
+                        }
+                        tbody.append(GetProductsByCatIdInAdmin(result['data'][i]['productName']
+                            , result['data'][i]['price']
+                            , result['data'][i]['status']
+                            // , result['data'][i]['image']
+                            // , result['data'][i]['productId']
+                            // , result['data'][i]['categoryId']
+                        ));
+                    }
+
+                } else {
+                }
+            }
+        });
+</script>

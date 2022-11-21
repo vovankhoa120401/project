@@ -73,7 +73,7 @@ if (isset($_POST['listAction'])) {
     }
 }
 
-if (isset($_GET['getProductByCatId'])) {
+if (isset($_GET['getProductsByCatId'])) {
     $product = new Product(0, 0, "", "", "", 0, 0, 0);
     echo $product->getListProductsByCatId($_GET['catId']);
 }

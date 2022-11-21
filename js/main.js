@@ -9,7 +9,7 @@
 var baseUrl = "http://localhost/project";
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
-'use strict';
+var pathArray = window.location.pathname.split('/');
 
 (function ($) {
 
@@ -202,8 +202,7 @@ const urlParams = new URLSearchParams(queryString);
     });
 
     let tbody = document.getElementById("productTest");
-    console.log(tbody);
-    function product(name, price, img, productId) {
+    function product(name, price, img, productId, categoryId) {
         let td = document.createElement('div');
         td.classList.add("col-lg-3");
         td.classList.add("col-md-4");
@@ -214,7 +213,7 @@ const urlParams = new URLSearchParams(queryString);
         td.innerHTML = `
         <div class="featured__item" id = "product${productId}">
             <div class="featured__item__pic set-bg" data-setbg="img/product/${img}">
-            <a href="shop-details.html?getProductById=true&productId=${productId}" class="">
+            <a href="shop-details.html?getProductById=true&productId=${productId}&catId=${categoryId}" class="">
                 <img src="img/product/${img}" alt="">
             </a>
                 <ul class="featured__item__pic__hover">
@@ -227,6 +226,30 @@ const urlParams = new URLSearchParams(queryString);
                 <h6 id = "product1"><a href="#">${name}</a></h6>
                 <h5>${price}</h5>
             </div>
+        </div>`;
+        return td;
+    }
+
+    function GetProductsByCatId(name, price, img, productId, categoryId) {
+        let td = document.createElement('div');
+        td.classList.add("col-lg-3");
+        td.classList.add("col-md-4");
+        td.classList.add("col-sm-6");
+        td.innerHTML = `
+        <div class="product__item" id = "product${productId}">
+                        <div class="product__item__pic set-bg" data-setbg="img/product/${img}">
+                            <ul class="product__item__pic__hover">
+                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                            </ul>
+                            <a href="shop-details.html?getProductById=true&productId=${productId}&catId=${categoryId}" class="">
+                            </a>
+                        </div>
+                        <div class="product__item__text">
+                            <h6><a href="#">${name}</a></h6>
+                            <h5>${price}</h5>
+                        </div>
         </div>`;
         return td;
     }
@@ -247,16 +270,17 @@ const urlParams = new URLSearchParams(queryString);
                         tbody.append(product(result['data'][i]['productName']
                             , result['data'][i]['price']
                             , result['data'][i]['image']
-                            , result['data'][i]['productId']));
+                            , result['data'][i]['productId']
+                            , result['data'][i]['categoryId']
+                        ));
                     }
 
                 } else {
-                    alert(result['message']);
                 }
             }
         });
     })
-    
+
     if (urlParams.get('getProductById') != "") {
         let getProductById = "true";
         let productId = urlParams.get('productId');
@@ -272,13 +296,43 @@ const urlParams = new URLSearchParams(queryString);
                 if (result['success'] === true) {
                     $(".productName").html(result['data'][0]['productName']);
                     $(".productPrice").html(result['data'][0]['price']);
-                    $(".productImg").attr('src',"img/product/" + result['data'][0]['image']);
+                    $(".productImg").attr('src', "img/product/" + result['data'][0]['image']);
+                    $(".productDescription").html(result['data'][0]['decription']);
+                } else {
+                    alert(result['message']);
+                }
+            }
+        });
+
+        let tbody = document.getElementById("productByCatId");
+        let getProductsByCatId = "true";
+        let catId = urlParams.get('catId');
+        $.ajax({
+            url: baseUrl + "/admin/product/controller/indexController.php",
+            type: "GET",
+            data: {
+                getProductsByCatId: getProductsByCatId,
+                catId: catId
+            },
+            dataType: "json",
+            success: function (result) {
+                if (result['success'] === true) {
+                    for (let i = 0; i <= result['data'].length; i++) {
+                        tbody.append(product(result['data'][i]['productName']
+                            , result['data'][i]['price']
+                            , result['data'][i]['image']
+                            , result['data'][i]['productId']
+                            , result['data'][i]['categoryId']
+                        ));
+                    }
+
                 } else {
                     alert(result['message']);
                 }
             }
         });
     }
+
     //img/product/details/product-details-1.jpg
     // $("#logo").click(function () {
     //     var getAllProduct = "isGet";

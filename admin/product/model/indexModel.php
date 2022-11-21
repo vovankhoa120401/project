@@ -69,7 +69,7 @@
                 $limit = 10;
                 $total_page = ceil($total_records / $limit);
                 $_SESSION["total_page_product"]= $total_page;
-            }
+            } 
             $limit = 10;
             if ($current_page > $_SESSION["total_page_product"]){
                 $current_page = $_SESSION["total_page_product"];
